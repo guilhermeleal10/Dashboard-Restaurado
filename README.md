@@ -40,11 +40,6 @@ Dashboard restaurado/
    \- dash-usuario.html
 ```
 
-## Como Abrir
-
-1. Abra `index.html` no navegador.
-2. O sistema redireciona para `pages/login.html`.
-3. Entre com uma conta demo ou use os botões de acesso rápido.
 
 ## Credenciais Demo
 
