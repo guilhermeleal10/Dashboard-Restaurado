@@ -1,6 +1,6 @@
 ﻿# Os Donos Do Meta 2.0
 
-Sistema web com multiperfis, interface responsiva e navegação por páginas separadas.
+Sistema web com multiperfis, interface responsiva e navegação.
 
 ## Visão Geral
 
@@ -55,9 +55,9 @@ Dashboard restaurado/
 ### Acesso
 
 - login por perfil
-- redirecionamento para a página correta
+- redirecionamento de página 
 - recuperação de acesso
-- persistência simples de sessão com `localStorage`
+- persistência simples
 
 ### Navegação
 
