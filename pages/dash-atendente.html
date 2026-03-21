@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Os Donos Do Meta 2.0 - Plataforma de gestão inteligente">
+  <meta name="theme-color" content="#050510">
+  <title>Os Donos Do Meta 2.0 - Painel do Atendente</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body data-page="dash-atendente">
+
+<!-- ===== BACKGROUNDS ===== -->
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
+
+<!-- ===== SIDEBAR OVERLAY ===== -->
+<div class="sidebar-overlay" onclick="toggleSidebar()" aria-hidden="true"></div>
+
+<!-- ===== ACCESSIBILITY BAR ===== -->
+<nav class="a11y-bar" role="navigation" aria-label="Acessibilidade">
+  <span class="a11y-label">♿</span>
+  <div class="a11y-sep" aria-hidden="true"></div>
+  <button class="a11y-btn" id="btn-contrast" title="Alto Contraste" aria-pressed="false" aria-label="Alternar alto contraste">🌗</button>
+  <button class="a11y-btn" id="btn-largetext" title="Texto Grande" aria-pressed="false" aria-label="Aumentar tamanho do texto">🔤</button>
+  <button class="a11y-btn" id="btn-dyslexia" title="Fonte para Dislexia" aria-pressed="false" aria-label="Fonte para dislexia">📖</button>
+  <button class="a11y-btn" id="btn-motion" title="Reduzir Animações" aria-pressed="false" aria-label="Reduzir animações">🎭</button>
+</nav>
+
+<!-- ===== LIBRAS WIDGET ===== -->
+<div class="libras-widget" role="complementary" aria-label="Acessibilidade em Libras">
+  <button class="libras-btn" id="libras-btn" aria-label="Abrir painel de Libras" aria-expanded="false">🤟</button>
+  <div class="libras-panel" id="libras-panel" role="dialog" aria-label="Painel Libras">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <span style="font-size:28px">🤟</span>
+      <div>
+        <div style="font-family:var(--font-display);font-size:13px;color:var(--neon-blue);font-weight:700">LIBRAS</div>
+        <div style="font-size:11px;color:var(--text-muted)">Língua Brasileira de Sinais</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.6">
+      Este sistema possui suporte a Libras. Clique nos ícones abaixo para ativar a interpretação em sinais.
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Intérprete de Libras ativado','success','🤟')">🖥️ Intérprete</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('VLibras ativado','success','🎬')">▶️ VLibras</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Descrição em áudio ativada','success','🔊')">🔊 Áudio</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Legenda ativada','success','📝')">📝 Legenda</button>
+    </div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted)">
+      Em conformidade com a Lei nº 10.436/2002 e o Decreto nº 5.626/2005
+    </div>
+  </div>
+</div>
+
+<div id="sidebar-atendente" class="sidebar sidebar-role" role="navigation" aria-label="Menu Atendente">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">OS DONOS DO META<span class="sub">v2.0 · Atendimento</span></div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar" style="background:linear-gradient(135deg,#aa6600,var(--warning));color:#000">JA</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">João Atendente</div>
+        <div class="sidebar-user-role">🎧 Atendente</div>
+      </div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Atendimento</div>
+      <button class="nav-item active" data-page="dash-atendente" data-section="painel-atendente"><span class="nav-icon">📊</span>Painel de Atendente</button>
+      <button class="nav-item" data-page="dash-atendente" data-section="chamados"><span class="nav-icon">🎫</span>Chamados</button>
+      <button class="nav-item" data-page="dash-atendente" data-section="chat-tempo-real"><span class="nav-icon">💬</span>Chat em Tempo Real</button>
+      <button class="nav-item" data-page="dash-atendente" data-section="clientes"><span class="nav-icon">👥</span>Clientes</button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Ferramentas</div>
+      <button class="nav-item" data-page="dash-atendente" data-section="base-conhecimentos"><span class="nav-icon">📚</span>Base de Conhecimentos</button>
+      <button class="nav-item" data-page="dash-atendente" data-section="agenda"><span class="nav-icon">📅</span>Agenda</button>
+      <button class="nav-item" data-page="dash-atendente" data-section="meu-desempenho"><span class="nav-icon">📊</span>Meu Desempenho</button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Sistema</div>
+      <button class="nav-item" data-page="dash-atendente" data-section="configuracao"><span class="nav-icon">⚙️</span>Configuração</button>
+      <button class="nav-item" data-page="logout"><span class="nav-icon">🚪</span>Sair</button>
+    </div>
+  </nav>
+</div>
+
+
+<div id="page-dash-atendente" class="page active" style="flex-direction:column" role="main" aria-label="Painel do Atendente">
+  <div class="main-content" style="margin-left:0;padding-left:284px">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" onclick="toggleSidebar()" aria-label="Abrir menu">☰</button>
+        <h1 class="page-title">🎧 CENTRAL DE ATENDIMENTO</h1>
+      </div>
+      <div class="topbar-right">
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);border-radius:8px;padding:6px 12px;cursor:pointer" onclick="App.toast('Status alterado','info','🟢')">
+          <div class="pulse-dot"></div><span style="font-size:12px;color:var(--success);font-weight:600">Online</span>
+        </div>
+        <button class="notif-btn" onclick="App.toast('8 chamados aguardando','warning','🎫')" aria-label="Chamados"><span>🎫</span><span class="notif-badge">8</span></button>
+        <div class="user-avatar" style="background:linear-gradient(135deg,#aa6600,var(--warning));color:#000">JA</div>
+      </div>
+    </header>
+
+    <!-- Stats Atendente -->
+    <div class="stat-grid">
+      <div class="glass-card stat-card yellow animate-in delay-1">
+        <span class="stat-icon">🎫</span>
+        <div class="stat-value" style="color:var(--warning)" data-count="23">0</div>
+        <div class="stat-label">Chamados Abertos</div>
+        <div class="stat-change down">↓ 8 aguardando você</div>
+      </div>
+      <div class="glass-card stat-card green animate-in delay-2">
+        <span class="stat-icon">✅</span>
+        <div class="stat-value" style="color:var(--success)" data-count="87">0</div>
+        <div class="stat-label">Resolvidos no Dia</div>
+        <div class="stat-change up">↑ Meta: 100</div>
+      </div>
+      <div class="glass-card stat-card blue animate-in delay-3">
+        <span class="stat-icon">⏱️</span>
+        <div class="stat-value neon-text" data-count="4" data-suffix="min">0min</div>
+        <div class="stat-label">Tempo Médio</div>
+        <div class="stat-change up">↑ Abaixo da meta</div>
+      </div>
+      <div class="glass-card stat-card green animate-in delay-4">
+        <span class="stat-icon">⭐</span>
+        <div class="stat-value" style="color:var(--success)" data-count="97" data-suffix="%">0%</div>
+        <div class="stat-label">Satisfação</div>
+        <div class="stat-change up">↑ Excelente!</div>
+      </div>
+    </div>
+
+    <div class="section-grid">
+      <!-- Fila de chamados -->
+      <div class="glass-card card animate-in delay-1" style="border-color:rgba(255,170,0,0.2)">
+        <div class="card-header">
+          <span class="card-title">🎫 Fila de Chamados</span>
+          <span class="badge badge-yellow">8 pendentes</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;max-height:280px;overflow-y:auto">
+          <div style="padding:12px;border-radius:8px;border:1px solid rgba(255,51,102,0.3);background:rgba(255,51,102,0.05)">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600">#4821 - Problema no pagamento</span><span class="badge badge-red">Urgente</span></div>
+            <div style="font-size:12px;color:var(--text-muted)">Cliente: Ana Silva · Há 45min</div>
+            <button class="btn btn-primary btn-sm" style="margin-top:8px;width:100%" onclick="App.toast('Atendimento iniciado - #4821','success','🎧')">Atender Agora</button>
+          </div>
+          <div style="padding:12px;border-radius:8px;border:1px solid rgba(255,170,0,0.3);background:rgba(255,170,0,0.05)">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600">#4820 - Dúvida sobre planos</span><span class="badge badge-yellow">Normal</span></div>
+            <div style="font-size:12px;color:var(--text-muted)">Cliente: João Lima · Há 1h</div>
+            <button class="btn btn-outline btn-sm" style="margin-top:8px;width:100%" onclick="App.toast('Atendimento iniciado - #4820','success','🎧')">Atender</button>
+          </div>
+          <div style="padding:12px;border-radius:8px;border:1px solid var(--border);background:rgba(0,20,60,0.3)">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600">#4819 - Cancelamento</span><span class="badge badge-blue">Baixo</span></div>
+            <div style="font-size:12px;color:var(--text-muted)">Cliente: Pedro Ramos · Há 2h</div>
+            <button class="btn btn-outline btn-sm" style="margin-top:8px;width:100%" onclick="App.toast('Atendimento iniciado - #4819','success','🎧')">Atender</button>
+          </div>
+        </div>
+      </div>
+      <!-- Gráfico do atendente -->
+      <div class="glass-card card animate-in delay-2">
+        <div class="card-header"><span class="card-title">📈 Atendimentos por Dia</span></div>
+        <div class="chart-container" id="chart-atendente"></div>
+      </div>
+    </div>
+
+    <!-- Chat de atendimento -->
+    <div class="glass-card card animate-in delay-3" style="border-color:rgba(255,170,0,0.2)">
+      <div class="card-header">
+        <span class="card-title">💬 Chat em Tempo Real — #4821</span>
+        <div style="display:flex;align-items:center;gap:8px"><div class="pulse-dot" style="background:var(--danger);box-shadow:0 0 6px var(--danger)"></div><span style="font-size:12px;color:var(--danger)">Cliente aguardando</span></div>
+      </div>
+      <div style="background:rgba(0,5,15,0.6);border-radius:8px;padding:16px;height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:12px">
+        <div style="display:flex;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:rgba(0,212,255,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px">AS</div><div style="background:rgba(0,212,255,0.1);border-radius:8px;padding:8px 12px;max-width:70%;font-size:13px">Olá! Tentei pagar mas não consegui concluir a compra 😞</div></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end"><div style="background:rgba(0,100,200,0.3);border-radius:8px;padding:8px 12px;max-width:70%;font-size:13px">Olá Ana! Vou verificar agora mesmo. Pode me confirmar os últimos 4 dígitos do cartão?</div><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#aa6600,var(--warning));flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#000">JA</div></div>
+        <div style="display:flex;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:rgba(0,212,255,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px">AS</div><div style="background:rgba(0,212,255,0.1);border-radius:8px;padding:8px 12px;max-width:70%;font-size:13px">São 4821</div></div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <input type="text" class="form-input" placeholder="Digite sua resposta..." id="chat-input" style="flex:1" onkeydown="if(event.key==='Enter')sendChatMsg()">
+        <button class="btn btn-primary" onclick="sendChatMsg()">📤 Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/dashboard.js"></script>
+</body>
+</html>
+

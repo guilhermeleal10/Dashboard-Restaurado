@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Os Donos Do Meta 2.0 - Plataforma de gestão inteligente">
+  <meta name="theme-color" content="#050510">
+  <title>Os Donos Do Meta 2.0 - Painel do Gerente</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body data-page="dash-gerente">
+
+<!-- ===== BACKGROUNDS ===== -->
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
+
+<!-- ===== SIDEBAR OVERLAY ===== -->
+<div class="sidebar-overlay" onclick="toggleSidebar()" aria-hidden="true"></div>
+
+<!-- ===== ACCESSIBILITY BAR ===== -->
+<nav class="a11y-bar" role="navigation" aria-label="Acessibilidade">
+  <span class="a11y-label">♿</span>
+  <div class="a11y-sep" aria-hidden="true"></div>
+  <button class="a11y-btn" id="btn-contrast" title="Alto Contraste" aria-pressed="false" aria-label="Alternar alto contraste">🌗</button>
+  <button class="a11y-btn" id="btn-largetext" title="Texto Grande" aria-pressed="false" aria-label="Aumentar tamanho do texto">🔤</button>
+  <button class="a11y-btn" id="btn-dyslexia" title="Fonte para Dislexia" aria-pressed="false" aria-label="Fonte para dislexia">📖</button>
+  <button class="a11y-btn" id="btn-motion" title="Reduzir Animações" aria-pressed="false" aria-label="Reduzir animações">🎭</button>
+</nav>
+
+<!-- ===== LIBRAS WIDGET ===== -->
+<div class="libras-widget" role="complementary" aria-label="Acessibilidade em Libras">
+  <button class="libras-btn" id="libras-btn" aria-label="Abrir painel de Libras" aria-expanded="false">🤟</button>
+  <div class="libras-panel" id="libras-panel" role="dialog" aria-label="Painel Libras">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <span style="font-size:28px">🤟</span>
+      <div>
+        <div style="font-family:var(--font-display);font-size:13px;color:var(--neon-blue);font-weight:700">LIBRAS</div>
+        <div style="font-size:11px;color:var(--text-muted)">Língua Brasileira de Sinais</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.6">
+      Este sistema possui suporte a Libras. Clique nos ícones abaixo para ativar a interpretação em sinais.
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Intérprete de Libras ativado','success','🤟')">🖥️ Intérprete</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('VLibras ativado','success','🎬')">▶️ VLibras</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Descrição em áudio ativada','success','🔊')">🔊 Áudio</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Legenda ativada','success','📝')">📝 Legenda</button>
+    </div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted)">
+      Em conformidade com a Lei nº 10.436/2002 e o Decreto nº 5.626/2005
+    </div>
+  </div>
+</div>
+
+<div id="sidebar-gerente" class="sidebar sidebar-role" role="navigation" aria-label="Menu Gerente">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">OS DONOS DO META<span class="sub">v2.0 · Gestão</span></div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar" style="background:linear-gradient(135deg,#008844,var(--success))">MG</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">Marina Gestora</div>
+        <div class="sidebar-user-role">📊 Gerente</div>
+      </div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Visão Geral</div>
+      <button class="nav-item active" data-page="dash-gerente" data-section="painel-gerencial"><span class="nav-icon">📊</span>Painel Gerencial</button>
+      <button class="nav-item" data-page="dash-gerente" data-section="metas-kpis"><span class="nav-icon">🎯</span>Metas e KPIs</button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Gestão</div>
+      <button class="nav-item" data-page="dash-gerente" data-section="equipe"><span class="nav-icon">👥</span>Equipe</button>
+      <button class="nav-item" data-page="dash-gerente" data-section="financeiro"><span class="nav-icon">💰</span>Financeiro</button>
+      <button class="nav-item" data-page="dash-gerente" data-section="produtos"><span class="nav-icon">📦</span>Produtos</button>
+      <button class="nav-item" data-page="dash-gerente" data-section="notificacoes"><span class="nav-icon">🔔</span>Notificações</button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Sistema</div>
+      <button class="nav-item" data-page="dash-gerente" data-section="configuracao"><span class="nav-icon">⚙️</span>Configuração</button>
+      <button class="nav-item" data-page="logout"><span class="nav-icon">🚪</span>Sair</button>
+    </div>
+  </nav>
+</div>
+
+
+<div id="page-dash-gerente" class="page active" style="flex-direction:column" role="main" aria-label="Painel do Gerente">
+  <div class="main-content" style="margin-left:0;padding-left:284px">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" onclick="toggleSidebar()" aria-label="Abrir menu">☰</button>
+        <h1 class="page-title">📊 PAINEL GERENCIAL</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="search-bar" role="search"><span>🔍</span><input type="text" placeholder="Buscar relatório..." aria-label="Buscar"></div>
+        <button class="notif-btn" onclick="App.toast('5 novos relatórios disponíveis','info','📊')" aria-label="Notificações"><span>🔔</span><span class="notif-badge">5</span></button>
+        <div class="user-avatar" style="background:linear-gradient(135deg,#008844,var(--success))">MG</div>
+      </div>
+    </header>
+
+    <!-- Boas-vindas -->
+    <div class="glass-card animate-in" style="padding:20px;margin-bottom:24px;background:linear-gradient(135deg,rgba(0,40,20,0.5),rgba(0,60,30,0.3));border-color:rgba(0,255,136,0.2)">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px">Bom dia, Gerente Marina 👋</div>
+          <div style="font-family:var(--font-display);font-size:20px;color:var(--success)">Meta mensal: 78% atingida</div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-success btn-sm" onclick="App.toast('Relatório gerado!','success','📊')">📊 Gerar Relatório</button>
+          <button class="btn btn-outline btn-sm" onclick="App.toast('Exportando dados...','info','📥')">📥 Exportar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-grid">
+      <div class="glass-card stat-card green animate-in delay-1">
+        <span class="stat-icon">💰</span>
+        <div class="stat-value" style="color:var(--success)">R$ <span data-count="284750">0</span></div>
+        <div class="stat-label">Faturamento Mensal</div>
+        <div class="stat-change up">↑ +23% vs mês anterior</div>
+      </div>
+      <div class="glass-card stat-card blue animate-in delay-2">
+        <span class="stat-icon">👥</span>
+        <div class="stat-value neon-text" data-count="1847">0</div>
+        <div class="stat-label">Clientes Ativos</div>
+        <div class="stat-change up">↑ +142 novos</div>
+      </div>
+      <div class="glass-card stat-card yellow animate-in delay-3">
+        <span class="stat-icon">🎯</span>
+        <div class="stat-value" style="color:var(--warning)" data-count="78" data-suffix="%">0%</div>
+        <div class="stat-label">Meta Atingida</div>
+        <div class="stat-change up">↑ Em ritmo esperado</div>
+      </div>
+      <div class="glass-card stat-card red animate-in delay-4">
+        <span class="stat-icon">😊</span>
+        <div class="stat-value" style="color:var(--danger)" data-count="94" data-suffix="%">0%</div>
+        <div class="stat-label">Satisfação</div>
+        <div class="stat-change up">↑ NPS +62</div>
+      </div>
+    </div>
+
+    <div class="section-grid">
+      <!-- Gráfico -->
+      <div class="glass-card card animate-in delay-1" style="border-color:rgba(0,255,136,0.2)">
+        <div class="card-header">
+          <span class="card-title">📈 Vendas por Dia</span>
+          <span class="badge badge-green">Esta semana</span>
+        </div>
+        <div class="chart-container" id="chart-gerente"></div>
+      </div>
+      <!-- Produtos em destaque -->
+      <div class="glass-card card animate-in delay-2">
+        <div class="card-header"><span class="card-title">🏆 Top Produtos</span></div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:20px">🥇</span>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600">Plano Premium</div><div class="progress-bar" style="margin-top:4px"><div class="progress-fill" style="width:85%"></div></div></div>
+            <span style="color:var(--success);font-weight:700;font-size:13px">R$ 94k</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:20px">🥈</span>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600">Plano Business</div><div class="progress-bar" style="margin-top:4px"><div class="progress-fill" style="width:62%"></div></div></div>
+            <span style="color:var(--success);font-weight:700;font-size:13px">R$ 68k</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:20px">🥉</span>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600">Plano Starter</div><div class="progress-bar" style="margin-top:4px"><div class="progress-fill" style="width:41%"></div></div></div>
+            <span style="color:var(--success);font-weight:700;font-size:13px">R$ 45k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Equipe -->
+    <div class="glass-card card animate-in delay-3">
+      <div class="card-header">
+        <span class="card-title">👥 Desempenho da Equipe</span>
+        <button class="btn btn-outline btn-sm" onclick="App.toast('Relatório de equipe gerado','success','📊')">📊 Ver completo</button>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Colaborador</th><th>Setor</th><th>Meta</th><th>Atingido</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--neon-mid),var(--neon-blue));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000">CD</div>Carlos Dev</div></td><td>Dev</td><td>R$ 50k</td><td style="color:var(--success)">R$ 51k</td><td><span class="badge badge-green">✅ Atingida</span></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#aa6600,var(--warning));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000">JA</div>João Atendente</div></td><td>Suporte</td><td>100 tickets</td><td style="color:var(--warning)">87 tickets</td><td><span class="badge badge-yellow">⚡ Em progresso</span></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6622cc,#bb88ff);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">AU</div>Ana Usuária</div></td><td>Marketing</td><td>500 leads</td><td style="color:var(--success)">612 leads</td><td><span class="badge badge-green">✅ Superada</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Atividades recentes -->
+    <div class="glass-card card animate-in delay-4">
+      <div class="card-header"><span class="card-title">🔔 Atividades Recentes</span></div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;background:rgba(0,255,136,0.05)"><span style="font-size:20px">💰</span><div style="flex:1"><div style="font-size:13px;font-weight:600">Venda realizada - Plano Premium</div><div style="font-size:11px;color:var(--text-muted)">2 min atrás</div></div><span style="color:var(--success);font-weight:700">+R$ 2.400</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;background:rgba(0,212,255,0.05)"><span style="font-size:20px">👤</span><div style="flex:1"><div style="font-size:13px;font-weight:600">Novo cliente cadastrado</div><div style="font-size:11px;color:var(--text-muted)">15 min atrás</div></div><span class="badge badge-blue">Novo</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;background:rgba(255,170,0,0.05)"><span style="font-size:20px">⚠️</span><div style="flex:1"><div style="font-size:13px;font-weight:600">Ticket #4821 aguarda resposta</div><div style="font-size:11px;color:var(--text-muted)">32 min atrás</div></div><span class="badge badge-yellow">Urgente</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/dashboard.js"></script>
+</body>
+</html>
+

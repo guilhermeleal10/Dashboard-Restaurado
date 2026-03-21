@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Os Donos Do Meta 2.0 - Plataforma de gestão inteligente">
+  <meta name="theme-color" content="#050510">
+  <title>Os Donos Do Meta 2.0 - Painel do Programador</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body data-page="dash-dev">
+
+<!-- ===== BACKGROUNDS ===== -->
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
+
+<!-- ===== SIDEBAR OVERLAY ===== -->
+<div class="sidebar-overlay" onclick="toggleSidebar()" aria-hidden="true"></div>
+
+<!-- ===== ACCESSIBILITY BAR ===== -->
+<nav class="a11y-bar" role="navigation" aria-label="Acessibilidade">
+  <span class="a11y-label">♿</span>
+  <div class="a11y-sep" aria-hidden="true"></div>
+  <button class="a11y-btn" id="btn-contrast" title="Alto Contraste" aria-pressed="false" aria-label="Alternar alto contraste">🌗</button>
+  <button class="a11y-btn" id="btn-largetext" title="Texto Grande" aria-pressed="false" aria-label="Aumentar tamanho do texto">🔤</button>
+  <button class="a11y-btn" id="btn-dyslexia" title="Fonte para Dislexia" aria-pressed="false" aria-label="Fonte para dislexia">📖</button>
+  <button class="a11y-btn" id="btn-motion" title="Reduzir Animações" aria-pressed="false" aria-label="Reduzir animações">🎭</button>
+</nav>
+
+<!-- ===== LIBRAS WIDGET ===== -->
+<div class="libras-widget" role="complementary" aria-label="Acessibilidade em Libras">
+  <button class="libras-btn" id="libras-btn" aria-label="Abrir painel de Libras" aria-expanded="false">🤟</button>
+  <div class="libras-panel" id="libras-panel" role="dialog" aria-label="Painel Libras">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <span style="font-size:28px">🤟</span>
+      <div>
+        <div style="font-family:var(--font-display);font-size:13px;color:var(--neon-blue);font-weight:700">LIBRAS</div>
+        <div style="font-size:11px;color:var(--text-muted)">Língua Brasileira de Sinais</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.6">
+      Este sistema possui suporte a Libras. Clique nos ícones abaixo para ativar a interpretação em sinais.
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Intérprete de Libras ativado','success','🤟')">🖥️ Intérprete</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('VLibras ativado','success','🎬')">▶️ VLibras</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Descrição em áudio ativada','success','🔊')">🔊 Áudio</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Legenda ativada','success','📝')">📝 Legenda</button>
+    </div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted)">
+      Em conformidade com a Lei nº 10.436/2002 e o Decreto nº 5.626/2005
+    </div>
+  </div>
+</div>
+
+<div id="sidebar-programador" class="sidebar sidebar-role" role="navigation" aria-label="Menu Programador">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">OS DONOS DO META<span class="sub">v2.0 · Sistema</span></div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">CD</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">Carlos Dev</div>
+        <div class="sidebar-user-role">💻 Programador</div>
+      </div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Desenvolvimento</div>
+      <button class="nav-item active" data-page="dash-dev" data-section="painel-tecnico"><span class="nav-icon">📊</span>Painel Técnico</button>
+      <button class="nav-item" data-page="dash-dev" data-section="logs-sistema"><span class="nav-icon">📋</span>Logs do Sistema</button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Monitoramento</div>
+      <button class="nav-item" data-page="dash-dev" data-section="servidores"><span class="nav-icon">📡</span>Servidores</button>
+      <button class="nav-item" data-page="dash-dev" data-section="feedbacks"><span class="nav-icon">💬</span>Feedbacks</button>
+      <button class="nav-item" data-page="dash-dev" data-section="implantacao"><span class="nav-icon">🚀</span>Implantação</button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Sistema</div>
+      <button class="nav-item" data-page="dash-dev" data-section="configuracao"><span class="nav-icon">⚙️</span>Configuração</button>
+      <button class="nav-item" data-page="logout"><span class="nav-icon">🚪</span>Sair</button>
+    </div>
+  </nav>
+</div>
+
+
+<div id="page-dash-dev" class="page active" style="flex-direction:column" role="main" aria-label="Painel do Programador">
+  <div class="main-content" style="margin-left:0;padding-left:284px">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" onclick="toggleSidebar()" aria-label="Abrir menu">☰</button>
+        <h1 class="page-title">💻 CENTRAL DE DESENVOLVIMENTO</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="search-bar" role="search"><span>🔍</span><input type="text" placeholder="Buscar commit, tarefa..." aria-label="Buscar"></div>
+        <button class="notif-btn" onclick="App.toast('3 novos alertas de sistema','warning','🔔')" aria-label="Notificações"><span>🔔</span><span class="notif-badge">3</span></button>
+        <div class="user-avatar" title="Carlos Dev" aria-label="Menu do usuário">CD</div>
+      </div>
+    </header>
+
+    <!-- Barra de status -->
+    <div class="animate-in" style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);border-radius:8px;padding:8px 14px">
+        <div class="pulse-dot"></div><span style="font-size:12px;color:var(--success);font-weight:600">Todos os serviços operacionais</span>
+      </div>
+      <div style="background:rgba(0,212,255,0.1);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--text-secondary)">🕐 Última implantação: 2h atrás</div>
+      <div style="background:rgba(0,212,255,0.1);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--text-secondary)">🌿 Ramificação: principal</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-grid">
+      <div class="glass-card stat-card blue animate-in delay-1">
+        <span class="stat-icon">⚡</span>
+        <div class="stat-value neon-text" data-count="99" data-suffix="%">0%</div>
+        <div class="stat-label">Uptime</div>
+        <div class="stat-change up">↑ Estável há 30 dias</div>
+      </div>
+      <div class="glass-card stat-card green animate-in delay-2">
+        <span class="stat-icon">🚀</span>
+        <div class="stat-value" style="color:var(--success)" data-count="247">0</div>
+        <div class="stat-label">Commits Hoje</div>
+        <div class="stat-change up">↑ +18% vs ontem</div>
+      </div>
+      <div class="glass-card stat-card yellow animate-in delay-3">
+        <span class="stat-icon">🐛</span>
+        <div class="stat-value" style="color:var(--warning)" data-count="12">0</div>
+        <div class="stat-label">Bugs Abertos</div>
+        <div class="stat-change down">↓ -5 resolvidos hoje</div>
+      </div>
+      <div class="glass-card stat-card blue animate-in delay-4">
+        <span class="stat-icon">📡</span>
+        <div class="stat-value neon-text" data-count="142" data-suffix="ms">0ms</div>
+        <div class="stat-label">Latência API</div>
+        <div class="stat-change up">↑ Ótimo desempenho</div>
+      </div>
+    </div>
+
+    <!-- Gráficos e registros -->
+    <div class="section-grid">
+      <div class="glass-card card animate-in delay-1">
+        <div class="card-header">
+          <span class="card-title">📈 Commits por Dia</span>
+          <span class="badge badge-blue">7 dias</span>
+        </div>
+        <div class="chart-container" id="chart-dev"></div>
+      </div>
+      <div class="glass-card card animate-in delay-2">
+        <div class="card-header">
+          <span class="card-title">🖥️ Recursos do Servidor</span>
+          <button class="btn btn-outline btn-sm" onclick="App.toast('Dados atualizados','success','🔄')">🔄 Atualizar</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px"><span>CPU</span><span style="color:var(--neon-blue)">68%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px"><span>RAM</span><span style="color:var(--warning)">82%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:82%;background:linear-gradient(90deg,#aa6600,var(--warning));box-shadow:0 0 8px var(--warning)"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px"><span>Disco</span><span style="color:var(--success)">41%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:41%;background:linear-gradient(90deg,#008844,var(--success));box-shadow:0 0 8px var(--success)"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px"><span>Rede</span><span style="color:var(--neon-blue)">55%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registros recentes -->
+    <div class="glass-card card animate-in delay-3">
+      <div class="card-header">
+        <span class="card-title">📋 Logs Recentes</span>
+        <div style="display:flex;gap:8px">
+          <span class="badge badge-green">AO VIVO</span>
+          <button class="btn btn-outline btn-sm" onclick="App.toast('Logs exportados!','success','📥')">📥 Exportar</button>
+        </div>
+      </div>
+      <div style="background:rgba(0,5,15,0.8);border-radius:8px;padding:16px;font-family:monospace;font-size:12px;max-height:200px;overflow-y:auto">
+        <div style="color:var(--success);margin-bottom:6px">[2025-03-19 14:32:01] ✅ Implantação concluída - v2.4.7 produção</div>
+        <div style="color:var(--neon-blue);margin-bottom:6px">[2025-03-19 14:28:44] ℹ️ API /users - 142ms - 200 OK</div>
+        <div style="color:var(--warning);margin-bottom:6px">[2025-03-19 14:25:12] ⚠️ RAM > 80% - Auto-scaling ativado</div>
+        <div style="color:var(--neon-blue);margin-bottom:6px">[2025-03-19 14:20:33] ℹ️ 1.247 requisições processadas</div>
+        <div style="color:var(--danger);margin-bottom:6px">[2025-03-19 14:15:02] ❌ Tempo limite excedido - /api/reports - nova tentativa #2</div>
+        <div style="color:var(--success);margin-bottom:6px">[2025-03-19 14:14:55] ✅ DB backup concluído - 2.3GB</div>
+        <div style="color:var(--neon-blue)">[2025-03-19 14:10:11] ℹ️ Cache limpo - 18% liberados</div>
+      </div>
+    </div>
+
+    <!-- Tabela de APIs -->
+    <div class="glass-card card animate-in delay-4">
+      <div class="card-header">
+        <span class="card-title">🔗 Rotas Ativas</span>
+        <button class="btn btn-primary btn-sm" onclick="App.toast('Novo endpoint criado!','success','✅')">+ Novo</button>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Endpoint</th><th>Método</th><th>Status</th><th>Latência</th><th>Req/min</th></tr></thead>
+          <tbody>
+            <tr><td><code style="color:var(--neon-blue)">/api/v2/users</code></td><td><span class="badge badge-green">GET</span></td><td><span class="badge badge-green">● Online</span></td><td>142ms</td><td>847</td></tr>
+            <tr><td><code style="color:var(--neon-blue)">/api/v2/auth</code></td><td><span class="badge badge-yellow">POST</span></td><td><span class="badge badge-green">● Online</span></td><td>88ms</td><td>1.203</td></tr>
+            <tr><td><code style="color:var(--neon-blue)">/api/v2/reports</code></td><td><span class="badge badge-green">GET</span></td><td><span class="badge badge-red">● Instável</span></td><td>2.1s</td><td>34</td></tr>
+            <tr><td><code style="color:var(--neon-blue)">/api/v2/payments</code></td><td><span class="badge badge-yellow">POST</span></td><td><span class="badge badge-green">● Online</span></td><td>204ms</td><td>512</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/dashboard.js"></script>
+</body>
+</html>
+

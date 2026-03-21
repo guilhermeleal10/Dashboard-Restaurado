@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Os Donos Do Meta 2.0 - Plataforma de gestão inteligente">
+  <meta name="theme-color" content="#050510">
+  <title>Os Donos Do Meta 2.0 - Recuperação</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body data-page="recovery">
+
+<!-- ===== FUNDOS ===== -->
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ===== CONTAINER DE TOASTS ===== -->
+<div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
+
+<!-- ===== SOBREPOSIÇÃO DA SIDEBAR ===== -->
+<div class="sidebar-overlay" onclick="toggleSidebar()" aria-hidden="true"></div>
+
+<!-- ===== BARRA DE ACESSIBILIDADE ===== -->
+<nav class="a11y-bar" role="navigation" aria-label="Acessibilidade">
+  <span class="a11y-label">♿</span>
+  <div class="a11y-sep" aria-hidden="true"></div>
+  <button class="a11y-btn" id="btn-contrast" title="Alto Contraste" aria-pressed="false" aria-label="Alternar alto contraste">🌗</button>
+  <button class="a11y-btn" id="btn-largetext" title="Texto Grande" aria-pressed="false" aria-label="Aumentar tamanho do texto">🔤</button>
+  <button class="a11y-btn" id="btn-dyslexia" title="Fonte para Dislexia" aria-pressed="false" aria-label="Fonte para dislexia">📖</button>
+  <button class="a11y-btn" id="btn-motion" title="Reduzir Animações" aria-pressed="false" aria-label="Reduzir animações">🎭</button>
+</nav>
+
+<!-- ===== WIDGET DE LIBRAS ===== -->
+<div class="libras-widget" role="complementary" aria-label="Acessibilidade em Libras">
+  <button class="libras-btn" id="libras-btn" aria-label="Abrir painel de Libras" aria-expanded="false">🤟</button>
+  <div class="libras-panel" id="libras-panel" role="dialog" aria-label="Painel Libras">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <span style="font-size:28px">🤟</span>
+      <div>
+        <div style="font-family:var(--font-display);font-size:13px;color:var(--neon-blue);font-weight:700">LIBRAS</div>
+        <div style="font-size:11px;color:var(--text-muted)">Língua Brasileira de Sinais</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.6">
+      Este sistema possui suporte a Libras. Clique nos ícones abaixo para ativar a interpretação em sinais.
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Intérprete de Libras ativado','success','🤟')">🖥️ Intérprete</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('VLibras ativado','success','🎬')">▶️ VLibras</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Descrição em áudio ativada','success','🔊')">🔊 Áudio</button>
+      <button class="btn btn-outline btn-sm" onclick="App.toast('Legenda ativada','success','📝')">📝 Legenda</button>
+    </div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted)">
+      Em conformidade com a Lei nº 10.436/2002 e o Decreto nº 5.626/2005
+    </div>
+  </div>
+</div>
+
+<main id="page-recovery" class="page active" role="main" aria-label="Recuperação de Senha" style="align-items:center;justify-content:center;min-height:100vh;padding:20px">
+  <div style="width:100%;max-width:440px">
+    <div style="text-align:center;margin-bottom:32px" class="animate-in">
+      <div style="font-size:56px;margin-bottom:16px">🔑</div>
+      <h2 style="font-family:var(--font-display);font-size:18px;font-weight:900;color:var(--neon-blue);letter-spacing:2px;margin-bottom:6px">RECUPERAR ACESSO</h2>
+      <p style="font-size:13px;color:var(--text-muted)">Informe seu e-mail cadastrado</p>
+    </div>
+    <div class="glass-card animate-in delay-1" style="padding:36px">
+      <div id="recovery-alert" class="alert hidden" role="alert"></div>
+      <div class="form-group">
+        <label class="form-label" for="recovery-email">E-mail cadastrado</label>
+        <div class="input-wrapper">
+          <span class="input-icon">📧</span>
+          <input type="email" id="recovery-email" class="form-input" placeholder="seu@email.com" autocomplete="email">
+        </div>
+      </div>
+      <div style="background:rgba(0,212,255,0.05);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:20px;font-size:12px;color:var(--text-secondary)">
+        📨 Enviaremos um link de recuperação para seu e-mail. Verifique também a caixa de spam.
+      </div>
+      <button class="btn btn-primary btn-full" id="btn-send-recovery" style="height:48px;font-family:var(--font-display);font-size:13px;letter-spacing:1px">
+        📨 Enviar Link de Recuperação
+      </button>
+      <div style="text-align:center;margin-top:20px">
+        <a href="#" data-page="login" style="font-size:13px;color:var(--text-secondary);text-decoration:none">← Voltar ao acesso</a>
+      </div>
+    </div>
+
+    <!-- Recuperação alternativa -->
+    <div class="glass-card animate-in delay-2" style="padding:20px;margin-top:16px">
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;font-weight:600">Outras opções de recuperação:</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn btn-outline btn-sm" onclick="App.toast('Código SMS enviado!','success','📱')">📱 Enviar código por SMS</button>
+        <button class="btn btn-outline btn-sm" onclick="App.toast('Entre em contato com o suporte','info','🎧')">🎧 Contatar suporte</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============================================================ -->
+<!-- ESTRUTURA COMPARTILHADA DO LAYOUT -->
+<!-- ============================================================ -->
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/dashboard.js"></script>
+</body>
+</html>
+
+
