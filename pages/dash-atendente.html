@@ -39,7 +39,7 @@
 <!-- ===== LIBRAS WIDGET ===== -->
 <div class="libras-widget" role="complementary" aria-label="Acessibilidade em Libras">
   <button class="libras-btn" id="libras-btn" aria-label="Abrir painel de Libras" aria-expanded="false">🤟</button>
-  <div class="libras-panel" id="libras-panel" role="dialog" aria-label="Painel Libras">
+  <div class="libras-panel" id="libras-panel" role="dialog" aria-label="Painel Libras" aria-hidden="true">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
       <span style="font-size:28px">🤟</span>
       <div>
@@ -51,10 +51,10 @@
       Este sistema possui suporte a Libras. Clique nos ícones abaixo para ativar a interpretação em sinais.
     </p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-      <button class="btn btn-outline btn-sm" onclick="App.toast('Intérprete de Libras ativado','success','🤟')">🖥️ Intérprete</button>
-      <button class="btn btn-outline btn-sm" onclick="App.toast('VLibras ativado','success','🎬')">▶️ VLibras</button>
-      <button class="btn btn-outline btn-sm" onclick="App.toast('Descrição em áudio ativada','success','🔊')">🔊 Áudio</button>
-      <button class="btn btn-outline btn-sm" onclick="App.toast('Legenda ativada','success','📝')">📝 Legenda</button>
+      <button class="btn btn-outline btn-sm" onclick="App.librasAction('interprete')">🖥️ Intérprete</button>
+      <button class="btn btn-outline btn-sm" onclick="App.librasAction('vlibras')">▶️ VLibras</button>
+      <button class="btn btn-outline btn-sm" onclick="App.librasAction('audio')">🔊 Áudio</button>
+      <button class="btn btn-outline btn-sm" onclick="App.librasAction('legenda')">📝 Legenda</button>
     </div>
     <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted)">
       Em conformidade com a Lei nº 10.436/2002 e o Decreto nº 5.626/2005
@@ -196,4 +196,5 @@
 <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>
+
 

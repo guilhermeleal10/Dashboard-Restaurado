@@ -305,9 +305,12 @@ const App = (() => {
     const panel = document.getElementById('libras-panel');
     if (!btn || !panel) return;
 
+    panel.setAttribute('aria-hidden', 'true');
+
     btn.addEventListener('click', () => {
       state.librasOpen = !state.librasOpen;
       panel.classList.toggle('show', state.librasOpen);
+      panel.setAttribute('aria-hidden', String(!state.librasOpen));
       btn.setAttribute('aria-expanded', String(state.librasOpen));
     });
 
@@ -315,10 +318,27 @@ const App = (() => {
       if (event.target.closest('.libras-widget')) return;
       state.librasOpen = false;
       panel.classList.remove('show');
+      panel.setAttribute('aria-hidden', 'true');
       btn.setAttribute('aria-expanded', 'false');
     });
   }
 
+  function librasAction(action) {
+    const messages = {
+      interprete: ['Modo intérprete selecionado.', 'success', '🤟'],
+      vlibras: ['Assistência em Libras selecionada.', 'success', '🎬'],
+      audio: ['Recurso de áudio selecionado.', 'success', '🔊'],
+      legenda: ['Legenda simplificada selecionada.', 'success', '📝']
+    };
+
+    const current = messages[action] || ['Recurso de acessibilidade selecionado.', 'info', '♿'];
+    toast(current[0], current[1], current[2]);
+
+    state.librasOpen = false;
+    document.getElementById('libras-panel')?.classList.remove('show');
+    document.getElementById('libras-panel')?.setAttribute('aria-hidden', 'true');
+    document.getElementById('libras-btn')?.setAttribute('aria-expanded', 'false');
+  }
   function bindOverlayDismiss() {
     document.addEventListener('click', (event) => {
       if (!event.target.classList.contains('sidebar-overlay')) return;
@@ -409,7 +429,8 @@ const App = (() => {
     showPage,
     toast,
     users,
-    updateActiveNav
+    updateActiveNav,
+    librasAction
   };
 })();
 
@@ -561,6 +582,9 @@ function initCharts() {
       </div>`).join('');
   });
 }
+
+
+
 
 
 
