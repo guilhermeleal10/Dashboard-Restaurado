@@ -113,9 +113,13 @@ body { font-family: var(--font-body); background: var(--dark); color: var(--text
 .libras-widget { position: fixed; bottom: 80px; right: 20px; z-index: 9000; }
 .libras-btn { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--neon-mid), var(--neon-blue)); border: none; cursor: pointer; font-size: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(0,212,255,0.5); transition: all 0.3s ease; animation: librasFloat 3s ease-in-out infinite; }
 @keyframes librasFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-.libras-btn:hover { box-shadow: 0 0 40px rgba(0,212,255,0.8); }
-.libras-panel { position: absolute; bottom: 70px; right: 0; width: 280px; background: rgba(0,5,20,0.97); backdrop-filter: blur(20px); border: 1px solid var(--border-bright); border-radius: 16px; padding: 20px; display: none; }
+.libras-btn:hover, .libras-btn:focus-visible { box-shadow: 0 0 40px rgba(0,212,255,0.8); transform: scale(1.04); outline: 2px solid rgba(0,212,255,0.45); outline-offset: 3px; }
+.libras-panel { position: absolute; bottom: 70px; right: 0; width: 280px; background: rgba(0,5,20,0.97); backdrop-filter: blur(20px); border: 1px solid var(--border-bright); border-radius: 16px; padding: 20px; display: none; box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
 .libras-panel.show { display: block; animation: slideUp 0.3s ease; }
+.libras-panel[aria-hidden="true"] { display: none; }
+.libras-panel[aria-hidden="false"] { display: block; }
+body.caption-mode { line-height: 1.85; }
+body.caption-mode p, body.caption-mode li, body.caption-mode .card-title, body.caption-mode .stat-label, body.caption-mode .nav-item, body.caption-mode .btn { letter-spacing: 0.04em; }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 body.high-contrast { --dark: #000; --dark2: #000; --glass: rgba(0,0,0,0.97); --text-primary: #fff; --border: rgba(255,255,0,0.8); --neon-blue: #ffff00; --neon-blue2: #ffff00; }
@@ -326,4 +330,5 @@ tr:hover td { background: rgba(0,212,255,0.03); }
   .libras-widget { right: 10px; bottom: 110px; }
   .a11y-bar { bottom: 10px; }
 }
+
 

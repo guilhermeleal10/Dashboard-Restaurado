@@ -561,3 +561,6 @@ function initCharts() {
       </div>`).join('');
   });
 }
+
+
+
