@@ -1,6 +1,6 @@
 ﻿# Os Donos Do Meta 2.0
 
-Sistema web com multiperfis, interface responsiva e navegação por páginas separadas.
+Sistema web com multiperfis, interface responsiva e navegação.
 
 ## Visão Geral
 
@@ -40,11 +40,6 @@ Dashboard restaurado/
    \- dash-usuario.html
 ```
 
-## Como Abrir
-
-1. Abra `index.html` no navegador.
-2. O sistema redireciona para `pages/login.html`.
-3. Entre com uma conta demo ou use os botões de acesso rápido.
 
 ## Credenciais Demo
 
@@ -60,9 +55,9 @@ Dashboard restaurado/
 ### Acesso
 
 - login por perfil
-- redirecionamento para a página correta
+- redirecionamento de página 
 - recuperação de acesso
-- persistência simples de sessão com `localStorage`
+- persistência simples
 
 ### Navegação
 
