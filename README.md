@@ -183,15 +183,5 @@ Responsável por:
 - modais
 - menu rápido
 
-## Observações
 
-- O projeto usa HTML, CSS e JavaScript puro.
-- Parte dos dados e interações é simulada para demonstração.
-- O foco atual está em navegação, organização por perfil e experiência visual.
 
-## Próximos Passos Sugeridos
-
-- persistir dados criados nos formulários
-- conectar as ações a armazenamento real
-- reduzir repetição entre páginas HTML
-- adicionar testes de navegação e responsividade
