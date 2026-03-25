@@ -1,24 +1,36 @@
-﻿# Os Donos Do Meta 2.0
+# Os Donos Do Meta 2.0
 
-Sistema web com multiperfis, interface responsiva e navegação.
+Dashboard web multiperfil desenvolvido com HTML, CSS e JavaScript puro. O projeto simula uma plataforma de gestao com autenticacao local, dashboards por perfil, acessibilidade e interacoes dinamicas sem dependencia de framework.
 
-## Visão Geral
+## Visao geral
 
-O projeto simula uma plataforma de gestão com quatro perfis principais:
+O sistema possui quatro perfis de demonstracao:
 
 - `Programador`
 - `Gerente`
 - `Atendente`
-- `Usuário`
+- `Usuario`
 
-Cada perfil possui:
+Cada perfil possui dashboard próprio, menu lateral com seções internas e conteudo adaptado ao contexto de uso.
 
-- página própria
-- menu lateral com seções funcionais
-- atalhos rápidos no botão `☰` quando aplicável
-- ações e conteúdos adaptados ao papel do perfil
+## Principais recursos
 
-## Estrutura Atual
+- login com redirecionamento automatico por perfil
+- recuperação de acesso com validação simples de e-mail
+- dashboards com navegação interna por seções
+- animações leves de entrada, contadores e gráficos
+- layout responsivo para desktop, tablet e mobile
+- barra de acessibilidade fixa em todas as páginas
+
+## Perfis e acessos demo
+
+| Perfil | E-mail | Senha | Dashboard |
+| Programador | `dev@meta.com` | `1234` | `pages/dash-dev.html` |
+| Gerente | `gerente@meta.com` | `1234` | `pages/dash-gerente.html` |
+| Atendente | `atendente@meta.com` | `1234` | `pages/dash-atendente.html` |
+| Usuario | `usuario@meta.com` | `1234` | `pages/dash-usuario.html` |l.
+
+## Estrutura do projeto
 
 ```text
 Dashboard restaurado/
@@ -34,74 +46,46 @@ Dashboard restaurado/
 \- pages/
    |- login.html
    |- recovery.html
+   |- Recuperar senha.html
    |- dash-dev.html
    |- dash-gerente.html
    |- dash-atendente.html
    \- dash-usuario.html
 ```
 
+## Seções por perfil
 
-## Credenciais Demo
+### Usuario
 
-| Perfil | E-mail | Senha | Página |
-|---|---|---|---|
-| Programador | `dev@meta.com` | `1234` | `dash-dev.html` |
-| Gerente | `gerente@meta.com` | `1234` | `dash-gerente.html` |
-| Atendente | `atendente@meta.com` | `1234` | `dash-atendente.html` |
-| Usuário | `usuario@meta.com` | `1234` | `dash-usuario.html` |
-
-## Funcionalidades Implementadas
-
-### Acesso
-
-- login por perfil
-- redirecionamento de página 
-- recuperação de acesso
-- persistência simples
-
-### Navegação
-
-- páginas separadas em `pages/`
-- menu lateral funcional por seção
-- menu rápido no botão `☰` para perfis com atalhos
-- recolhimento do menu lateral em notebook
-- menu hambúrguer em telas menores
-
-### Perfil `Usuário`
-
-- `Início`
+- `Inicio`
 - `Meus Pedidos`
 - `Favoritos`
 - `Pagamentos`
 - `Contato`
 - `Perguntas Frequentes`
 - `Meu Perfil`
-- `Configurações`
+- `Configuracoes`
 
-### Perfil `Programador`
+### Programador
 
-- `Painel Técnico`
+- `Painel Tecnico`
 - `Logs do Sistema`
 - `Servidores`
 - `Feedbacks`
-- `Implantação`
-- `Configuração`
-- cadastro rápido de nova rota
-- registro rápido de incidente
+- `Implantacao`
+- `Configuracao`
 
-### Perfil `Gerente`
+### Gerente
 
 - `Painel Gerencial`
 - `Metas e KPIs`
 - `Equipe`
 - `Financeiro`
 - `Produtos`
-- `Notificações`
-- `Configuração`
-- adição rápida de colaborador
-- atualização de meta principal
+- `Notificacoes`
+- `Configuracao`
 
-### Perfil `Atendente`
+### Atendente
 
 - `Painel de Atendente`
 - `Chamados`
@@ -110,88 +94,14 @@ Dashboard restaurado/
 - `Base de Conhecimentos`
 - `Agenda`
 - `Meu Desempenho`
-- `Configuração`
-- cadastro de novos clientes
-- abertura de chamados
+- `Configuracao`
 
 ## Acessibilidade
 
-Recursos disponíveis no rodapé:
+O projeto inclui recursos de acessibilidade em todas as paginas:
 
 - alto contraste
 - texto grande
-- fonte para dislexia
-- redução de animações
+- ajuste de leitura para dislexia
+- reducao de animações
 - painel de Libras
-
-## Responsividade
-
-O layout foi ajustado para:
-
-- notebook
-- tablet
-- Android
-- telas pequenas
-
-Elementos adaptados:
-
-- sidebar
-- topbar
-- cards
-- tabelas
-- barra de acessibilidade
-- painel de Libras
-
-## Arquivos Principais
-
-### `assets/js/app.js`
-
-Responsável por:
-
-- sessão
-- navegação entre páginas
-- autenticação
-- acessibilidade
-- comportamento global do sistema
-
-### `assets/js/layout.js`
-
-Responsável por:
-
-- menu rápido do `☰`
-- seções funcionais dos dashboards
-- modais de ações
-- funções dinâmicas por perfil
-
-### `assets/js/dashboard.js`
-
-Responsável por:
-
-- inicialização visual das dashboards
-- animação de barras
-- ajustes leves de página
-
-### `assets/css/styles.css`
-
-Responsável por:
-
-- tema visual
-- responsividade
-- sidebar
-- topbar
-- cards
-- modais
-- menu rápido
-
-## Observações
-
-- O projeto usa HTML, CSS e JavaScript puro.
-- Parte dos dados e interações é simulada para demonstração.
-- O foco atual está em navegação, organização por perfil e experiência visual.
-
-## Próximos Passos Sugeridos
-
-- persistir dados criados nos formulários
-- conectar as ações a armazenamento real
-- reduzir repetição entre páginas HTML
-- adicionar testes de navegação e responsividade
